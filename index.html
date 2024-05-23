@@ -12,10 +12,17 @@
         .grid-item {
             padding: 5px;
         }
+        .copy-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div class="grid-container" id="grid-container"></div>
+    <button class="copy-button" onclick="copyToClipboard()">クリップボードにコピー</button>
 
     <script>
         function generateRandomNumber() {
@@ -24,18 +31,33 @@
 
         function createGrid() {
             const container = document.getElementById('grid-container');
+            const allRows = [];
             for (let row = 0; row < 7; row++) {
+                const rowArray = [];
                 for (let col = 0; col < 53; col++) {
                     const div = document.createElement('div');
                     div.className = 'grid-item';
                     const randomNum = generateRandomNumber();
-                    div.textContent = `:github_contributions_${randomNum}_transparent:`;
+                    const content = `:github_contributions_${randomNum}_transparent:`;
+                    div.textContent = content;
                     container.appendChild(div);
+                    rowArray.push(content);
                 }
+                allRows.push(rowArray.join(''));
             }
+            return allRows.join('\n');
         }
 
-        createGrid();
+        function copyToClipboard() {
+            const gridText = createGrid();
+            navigator.clipboard.writeText(gridText).then(() => {
+                alert('クリップボードにコピーしました！');
+            }).catch(err => {
+                console.error('クリップボードへのコピーに失敗しました:', err);
+            });
+        }
+
+        createGrid(); // 初回表示のためにグリッドを作成
     </script>
 </body>
 </html>
