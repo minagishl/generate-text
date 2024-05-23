@@ -160,7 +160,7 @@
         function copyToClipboard() {
             // クリップボードへのコピーがサポートされていない場合はアラートを表示
             if (!navigator.clipboard) {
-                alert('このブラウザはクリップボードへのコピーをサポートしていません。');
+                alert(currentLanguage === 'ja' ? 'クリップボードへのコピーがサポートされていません。手動でコピーしてください。' : 'Copying to clipboard is not supported. Please copy manually.');
                 return;
             }
 
@@ -170,9 +170,9 @@
             }
 
             navigator.clipboard.writeText(gridText).then(() => {
-                alert('クリップボードにコピーしました！');
+                alert(currentLanguage === 'ja' ? 'クリップボードにコピーしました。' : 'Copied to clipboard.');
             }).catch(err => {
-                console.error('クリップボードへのコピーに失敗しました:', err);
+                console.error('Failed to copy: ', err);
             });
         }
 
