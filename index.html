@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>GitHub Contributions Generator</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(53, auto);
+            gap: 5px;
+        }
+        .grid-item {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container" id="grid-container"></div>
+
+    <script>
+        function generateRandomNumber() {
+            return Math.floor(Math.random() * 5) + 1;
+        }
+
+        function createGrid() {
+            const container = document.getElementById('grid-container');
+            for (let row = 0; row < 7; row++) {
+                for (let col = 0; col < 53; col++) {
+                    const div = document.createElement('div');
+                    div.className = 'grid-item';
+                    const randomNum = generateRandomNumber();
+                    div.textContent = `:github_contributions_${randomNum}_transparent:`;
+                    container.appendChild(div);
+                }
+            }
+        }
+
+        createGrid();
+    </script>
+</body>
+</html>
