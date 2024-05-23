@@ -26,11 +26,44 @@
 
 <body>
     <div class="grid-container" id="grid-container"></div>
-    <button class="button" onclick="copyToClipboard()">クリップボードにコピー</button>
-    <button class="button" onclick="createGrid()">再生成</button>
-    <button class="button" onclick="" disabled title="現在非対応です">プレビューに切り替える</button>
+    <button class="button copy-button" onclick="copyToClipboard()">Copy to clipboard</button>
+    <button class="button regenerate-button" onclick="createGrid()">Regenerate</button>
+    <button class="button preview-button" onclick="" disabled title="現在非対応です">Switch to preview</button>
+    <button class="button switch-language-button">Switch language</button>
 
     <script>
+        let currentLanguage = 'en'; // デフォルトの言語を設定
+
+        function switchLanguage() {
+            // 現在の言語を切り替え
+            currentLanguage = currentLanguage === 'ja' ? 'en' : 'ja';
+            // ページのテキストを更新
+            updatePageText();
+        }
+
+        function updatePageText() {
+            // 言語に基づいてページのテキストを更新
+            const copyButton = document.querySelector('.copy-button');
+            const regenerateButton = document.querySelector('.regenerate-button');
+            const previewButton = document.querySelector('.preview-button');
+            const switchLanguageButton = document.querySelector('.switch-language-button');
+
+            if (currentLanguage === 'ja') {
+                copyButton.textContent = 'クリップボードにコピー';
+                regenerateButton.textContent = '再生成';
+                previewButton.textContent = 'プレビューに切り替える';
+                switchLanguageButton.textContent = '言語を切り替える';
+            } else {
+                copyButton.textContent = 'Copy to clipboard';
+                regenerateButton.textContent = 'Regenerate';
+                previewButton.textContent = 'Switch to preview';
+                switchLanguageButton.textContent = 'Switch language';
+            }
+        }
+
+        // 言語を切り替えるボタンにイベントリスナーを追加
+        document.querySelector('.switch-language-button').addEventListener('click', switchLanguage);
+
         let gridText = '';
         function generateRandomNumber() {
             return Math.floor(Math.random() * 5) + 1;
