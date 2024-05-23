@@ -29,6 +29,8 @@
     <button class="button copy-button" onclick="copyToClipboard()">Copy to clipboard</button>
     <button class="button regenerate-button" onclick="createGrid()">Regenerate</button>
     <button class="button preview-button" onclick="preview()">Switch to preview</button>
+    <button class="button all-white" onclick="allWhite()">All white</button>
+    <button class="button all-green" onclick="allGreen()">All green</button>
     <button class="button switch-language-button">Switch language</button>
 
     <script>
@@ -74,6 +76,28 @@
             currentLanguage = currentLanguage === 'ja' ? 'en' : 'ja';
             // ページのテキストを更新
             updatePageText();
+        }
+
+        function allWhite() {
+            const container = document.getElementById('grid-container');
+            const gridItems = container.querySelectorAll('.grid-item');
+            gridItems.forEach((item, index) => {
+                const content = item.textContent;
+                const regex = /\d+/;
+                const modifiedContent = content.replace(regex, '1');
+                item.textContent = modifiedContent;
+            });
+        }
+
+        function allGreen() {
+            const container = document.getElementById('grid-container');
+            const gridItems = container.querySelectorAll('.grid-item');
+            gridItems.forEach((item, index) => {
+                const content = item.textContent;
+                const regex = /\d+/;
+                const modifiedContent = content.replace(regex, '5');
+                item.textContent = modifiedContent;
+            });
         }
 
         function updatePageText() {
