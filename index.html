@@ -28,10 +28,45 @@
     <div class="grid-container" id="grid-container"></div>
     <button class="button copy-button" onclick="copyToClipboard()">Copy to clipboard</button>
     <button class="button regenerate-button" onclick="createGrid()">Regenerate</button>
-    <button class="button preview-button" onclick="" disabled title="現在非対応です">Switch to preview</button>
+    <button class="button preview-button" onclick="preview()">Switch to preview</button>
     <button class="button switch-language-button">Switch language</button>
 
     <script>
+        const color = {
+            1: '#ebedf0',
+            2: '#9be9a8',
+            3: '#40c463',
+            4: '#30a14e',
+            5: '#216e39',
+        }
+
+        let previewMode = false;
+
+        function preview() {
+            previewMode = !previewMode;
+            if (previewMode) {
+                const container = document.getElementById('grid-container');
+                const gridItems = container.querySelectorAll('.grid-item');
+                gridItems.forEach((item, index) => {
+                    const content = item.textContent;
+                    const regex = /:github_contributions_(\d+)_transparent:/;
+                    const match = content.match(regex);
+                    if (match) {
+                        const num = parseInt(match[1]);
+                        const colorCode = color[num];
+                        item.style.backgroundColor = colorCode;
+                    }
+                });
+            } else {
+                const container = document.getElementById('grid-container');
+                const gridItems = container.querySelectorAll('.grid-item');
+                gridItems.forEach((item, index) => {
+                    item.style.backgroundColor = 'transparent';
+                });
+            }
+        }
+
+
         let currentLanguage = 'en'; // デフォルトの言語を設定
 
         function switchLanguage() {
