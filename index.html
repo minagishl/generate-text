@@ -106,17 +106,23 @@
             const copyButton = document.querySelector('.copy-button');
             const regenerateButton = document.querySelector('.regenerate-button');
             const previewButton = document.querySelector('.preview-button');
+            const allWhiteButton = document.querySelector('.all-white');
+            const allGreenButton = document.querySelector('.all-green');
             const switchLanguageButton = document.querySelector('.switch-language-button');
 
             if (currentLanguage === 'ja') {
                 copyButton.textContent = 'クリップボードにコピー';
                 regenerateButton.textContent = '再生成';
                 previewButton.textContent = 'プレビューに切り替える';
+                allWhiteButton.textContent = 'すべて白にする';
+                allGreenButton.textContent = 'すべて緑にする';
                 switchLanguageButton.textContent = '言語を切り替える';
             } else {
                 copyButton.textContent = 'Copy to clipboard';
                 regenerateButton.textContent = 'Regenerate';
                 previewButton.textContent = 'Switch to preview';
+                allWhiteButton.textContent = 'All white';
+                allGreenButton.textContent = 'All green';
                 switchLanguageButton.textContent = 'Switch language';
             }
         }
